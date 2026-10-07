@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">CitaFácil</string>
+    <string name="app_subtitle">Gestión de Citas para Negocios</string>
+
+    <!-- Navigation -->
+    <string name="nav_appointments">Citas</string>
+    <string name="nav_calendar">Calendario</string>
+    <string name="nav_settings">Configuración</string>
+    <string name="nav_new_appointment">Nueva Cita</string>
+    <string name="nav_edit_appointment">Editar Cita</string>
+    <string name="nav_appointment_detail">Detalle de Cita</string>
+
+    <!-- Filters & Status -->
+    <string name="filter_all">Todas</string>
+    <string name="status_pending">Pendiente</string>
+    <string name="status_in_progress">En atención</string>
+    <string name="status_completed">Completada</string>
+    <string name="status_cancelled">Cancelada</string>
+
+    <!-- Search & Stats -->
+    <string name="search_placeholder">Buscar por cliente, teléfono o servicio...</string>
+    <string name="stat_today">Citas Hoy</string>
+    <string name="stat_pending">Pendientes</string>
+    <string name="stat_income">Ingresos Est.</string>
+    <string name="stat_completed">Completadas</string>
+
+    <!-- Appointment Form -->
+    <string name="section_client_info">Información del Cliente</string>
+    <string name="client_name">Nombre del cliente</string>
+    <string name="client_name_hint">Ej. Juan Pérez</string>
+    <string name="client_phone">Teléfono de contacto</string>
+    <string name="client_phone_hint">Ej. 5512345678</string>
+    <string name="client_email">Correo electrónico (opcional)</string>
+    <string name="client_email_hint">Ej. cliente@correo.com</string>
+    <string name="section_service">Servicio Principal (Seleccione uno)</string>
+    <string name="section_addons">Complementos y Adicionales</string>
+    <string name="section_schedule">Fecha y Hora de la Cita</string>
+    <string name="select_date">Seleccionar fecha</string>
+    <string name="select_time">Seleccionar hora</string>
+    <string name="notes">Notas o indicaciones especiales</string>
+    <string name="notes_hint">Ej. Preferencia de estilo, alergias o detalles...</string>
+    <string name="estimated_duration">Duración estimada</string>
+    <string name="estimated_total">Total a cobrar</string>
+    <string name="save_appointment">Guardar Cita</string>
+    <string name="update_appointment">Actualizar Cita</string>
+    <string name="validation_name_required">Por favor ingrese el nombre del cliente</string>
+    <string name="validation_phone_required">Por favor ingrese un número de teléfono válido</string>
+
+    <!-- Detail Screen -->
+    <string name="appointment_info">Información de la Cita</string>
+    <string name="quick_actions">Acciones Rápidas</string>
+    <string name="change_status">Cambiar Estado</string>
+    <string name="send_notifications">Notificar al Cliente (Servicios Web)</string>
+    <string name="whatsapp_confirm">WhatsApp</string>
+    <string name="sms_reminder">SMS Recordatorio</string>
+    <string name="email_formal">Correo Formal</string>
+    <string name="delete_appointment">Eliminar Cita</string>
+    <string name="delete_confirm_title">¿Eliminar cita?</string>
+    <string name="delete_confirm_message">Esta acción no se puede deshacer. ¿Desea eliminar la cita de %s?</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete">Eliminar</string>
+    <string name="edit">Editar</string>
+
+    <!-- Sync & Offline -->
+    <string name="sync_status_synced">Sincronizado</string>
+    <string name="sync_status_pending">Pendiente de sincronizar</string>
+    <string name="sync_now">Sincronizar ahora</string>
+    <string name="sync_offline_mode">Modo Offline Activo (Room DB)</string>
+    <string name="last_synced">Última sincronización: %s</string>
+    <string name="sync_success">Sincronización en la nube completada</string>
+
+    <!-- Empty State -->
+    <string name="no_appointments">No hay citas registradas</string>
+    <string name="no_appointments_desc">Agenda tu primera cita presionando el botón de abajo o carga datos de prueba en Ajustes.</string>
+    <string name="add_first_appointment">Nueva Cita</string>
+    <string name="load_sample_data">Cargar Datos de Ejemplo</string>
+    <string name="sample_data_loaded">Se han cargado citas de ejemplo exitosamente</string>
+
+    <!-- Settings Screen -->
+    <string name="business_settings">Datos del Negocio</string>
+    <string name="business_name">Nombre de la Empresa / Negocio</string>
+    <string name="business_phone">Teléfono del Negocio</string>
+    <string name="currency">Moneda</string>
+    <string name="cloud_sync_title">Sincronización en la Nube</string>
+    <string name="cloud_sync_desc">Sincroniza automáticamente los datos locales con el backend cuando hay conexión.</string>
+    <string name="auto_sync">Sincronización automática</string>
+    <string name="web_services_title">Servicios Web de Notificación</string>
+    <string name="whatsapp_business_desc">API de WhatsApp Business para confirmación directa.</string>
+    <string name="twilio_sms_desc">API de Twilio / SMS para recordatorios automáticos.</string>
+    <string name="sendgrid_email_desc">API de SendGrid para notificaciones formales.</string>
+    <string name="project_credits_title">Información del Proyecto</string>
+    <string name="project_authors">Autores: Carlos Daniel Ayala Nieto &amp; Alan Armando García Guzmán</string>
+    <string name="project_date">Fecha: Octubre 2026</string>
+    <string name="project_architecture">Arquitectura: ViewModel + Repository + Room DB (Offline-First)</string>
+</resources>

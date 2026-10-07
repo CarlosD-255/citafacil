@@ -1,0 +1,8 @@
+{
+  "name": "CitaFácil",
+  "description": "App de gestión de citas para pequeñas empresas con arquitectura offline-first, Room, recordatorios por WhatsApp/SMS/Email y diseño adaptativo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
