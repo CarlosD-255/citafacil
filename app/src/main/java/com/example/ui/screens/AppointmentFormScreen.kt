@@ -193,7 +193,6 @@ fun AppointmentFormScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
-            // RF01: Client Information
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -209,7 +208,6 @@ fun AppointmentFormScreen(
                         fontWeight = FontWeight.Bold
                     )
 
-                    // Client Name Input
                     OutlinedTextField(
                         value = formState.clientName,
                         onValueChange = { viewModel.updateFormClientName(it) },
@@ -224,7 +222,6 @@ fun AppointmentFormScreen(
                             .testTag("input_client_name")
                     )
 
-                    // Client Phone Input
                     OutlinedTextField(
                         value = formState.clientPhone,
                         onValueChange = { viewModel.updateFormClientPhone(it) },
@@ -240,7 +237,6 @@ fun AppointmentFormScreen(
                             .testTag("input_client_phone")
                     )
 
-                    // Client Email Input
                     OutlinedTextField(
                         value = formState.clientEmail,
                         onValueChange = { viewModel.updateFormClientEmail(it) },
@@ -256,7 +252,6 @@ fun AppointmentFormScreen(
                 }
             }
 
-            // RF03: Date & Time Schedule Selection
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -276,7 +271,6 @@ fun AppointmentFormScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        // Date Picker trigger button
                         OutlinedButton(
                             onClick = { showDatePicker = true },
                             modifier = Modifier
@@ -300,7 +294,6 @@ fun AppointmentFormScreen(
                             }
                         }
 
-                        // Time Picker trigger button
                         OutlinedButton(
                             onClick = { showTimePicker = true },
                             modifier = Modifier
@@ -327,7 +320,6 @@ fun AppointmentFormScreen(
                 }
             }
 
-            // RF02: Primary Service Selection with RadioButtons
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -395,7 +387,6 @@ fun AppointmentFormScreen(
                 }
             }
 
-            // RF02: Addons Selection with Checkboxes
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -465,7 +456,6 @@ fun AppointmentFormScreen(
                 }
             }
 
-            // Notes and Special Instructions
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -498,7 +488,6 @@ fun AppointmentFormScreen(
         }
     }
 
-    // Modal Date Picker
     if (showDatePicker) {
         AppDatePickerDialog(
             initialDateMillis = formState.dateMillis,
@@ -507,7 +496,6 @@ fun AppointmentFormScreen(
         )
     }
 
-    // Modal Time Picker
     if (showTimePicker) {
         AppTimePickerDialog(
             initialHour = formState.hour,

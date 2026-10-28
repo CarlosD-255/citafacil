@@ -13,6 +13,7 @@ import com.example.data.model.BusinessCatalog
 import com.example.data.model.ServiceOption
 import com.example.data.remote.CloudSyncService
 import com.example.data.remote.NotificationResult
+import com.example.data.remote.RetrofitClient
 import com.example.data.remote.SyncState
 import com.example.data.remote.WebNotificationService
 import com.example.data.repository.AppointmentRepository
@@ -84,11 +85,9 @@ class AppointmentViewModel(
 
     val syncState: StateFlow<SyncState> = repository.syncState
 
-    // All raw appointments from Room
     val allAppointments: StateFlow<List<Appointment>> = repository.allAppointments
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    // Filtered appointments reactive to search query and status filter
     val filteredAppointments: StateFlow<List<Appointment>> = combine(
         allAppointments,
         _searchQuery,
@@ -106,7 +105,6 @@ class AppointmentViewModel(
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    // Reactive stats computed from Room data
     val stats: StateFlow<AppointmentStats> = allAppointments.combine(_searchQuery) { list, _ ->
         val today = list.count { it.isToday() }
         val pending = list.count { it.status == AppointmentStatus.PENDING }
@@ -121,7 +119,6 @@ class AppointmentViewModel(
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), AppointmentStats())
 
     init {
-        // App starts with a clean slate for the user to create their own appointments
     }
 
     fun clearAllAppointments() {
@@ -181,8 +178,6 @@ class AppointmentViewModel(
     fun clearToastMessage() {
         _toastMessage.value = null
     }
-
-    // --- Form Management ---
 
     fun initNewForm() {
         val cal = Calendar.getInstance().apply {
@@ -326,8 +321,6 @@ class AppointmentViewModel(
         }
     }
 
-    // --- Web Notifications ---
-
     fun sendWhatsApp(appointment: Appointment, businessName: String = "CitaFácil") {
         notificationService.sendWhatsApp(appointment, businessName)
     }
@@ -336,7 +329,7 @@ class AppointmentViewModel(
         notificationService.sendSms(appointment, businessName)
     }
 
-    fun sendEmail(appointment: Appointment, businessName: String = "CitaFácil") {
+    fun sendEmail(appointment: Appointment, businessName: String = "CitaFাইল") {
         notificationService.sendEmail(appointment, businessName)
     }
 
@@ -354,7 +347,7 @@ class AppointmentViewModel(
                 @Suppress("UNCHECKED_CAST")
                 override fun <T : ViewModel> create(modelClass: Class<T>): T {
                     val db = AppDatabase.getDatabase(application)
-                    val syncService = CloudSyncService(application, db.appointmentDao())
+                    val syncService = CloudSyncService(application, db.appointmentDao(), RetrofitClient.apiService)
                     val repository = AppointmentRepository(db.appointmentDao(), syncService)
                     val notificationService = WebNotificationService(application)
                     return AppointmentViewModel(application, repository, notificationService) as T

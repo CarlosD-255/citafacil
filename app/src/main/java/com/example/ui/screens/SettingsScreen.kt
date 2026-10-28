@@ -105,7 +105,6 @@ fun SettingsScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Business Profile
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -152,7 +151,6 @@ fun SettingsScreen(
                 }
             }
 
-            // RF06: Cloud Synchronization (Offline-First)
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -183,7 +181,6 @@ fun SettingsScreen(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
-                    // Auto-sync switch
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -210,7 +207,6 @@ fun SettingsScreen(
 
                     HorizontalDivider()
 
-                    // Last sync status
                     val lastSyncStr = if (syncState.lastSyncTimestamp > 0) {
                         val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
                         sdf.format(Date(syncState.lastSyncTimestamp))
@@ -254,7 +250,6 @@ fun SettingsScreen(
                 }
             }
 
-            // RF07: Third-Party Web Services Specs
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -279,7 +274,6 @@ fun SettingsScreen(
                         )
                     }
 
-                    // WhatsApp Row
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
                             imageVector = Icons.Default.Send,
@@ -294,7 +288,6 @@ fun SettingsScreen(
                         }
                     }
 
-                    // SMS Twilio Row
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
                             imageVector = Icons.Default.Message,
@@ -309,7 +302,6 @@ fun SettingsScreen(
                         }
                     }
 
-                    // SendGrid Row
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
                             imageVector = Icons.Default.Email,
@@ -326,7 +318,6 @@ fun SettingsScreen(
                 }
             }
 
-            // Data Tools & Sample Data
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -378,7 +369,6 @@ fun SettingsScreen(
                 }
             }
 
-            // Academic Credits & Authors
             Card(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(

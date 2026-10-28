@@ -145,7 +145,6 @@ fun AppointmentDetailScreen(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Hero Card: Date, Time & Status
             ElevatedCard(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -230,7 +229,6 @@ fun AppointmentDetailScreen(
                     HorizontalDivider()
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    // Status Change Chips (RF04)
                     Text(
                         text = stringResource(R.string.change_status),
                         style = MaterialTheme.typography.labelMedium,
@@ -267,11 +265,18 @@ fun AppointmentDetailScreen(
                             modifier = Modifier.weight(1f),
                             tag = "set_completed_btn"
                         )
+                        StatusChangeButton(
+                            label = "Cancelar",
+                            isSelected = appointment.status == AppointmentStatus.CANCELLED,
+                            color = Color(0xFFDC2626),
+                            onClick = { viewModel.updateStatus(appointment.id, AppointmentStatus.CANCELLED) },
+                            modifier = Modifier.weight(1f),
+                            tag = "set_cancelled_btn"
+                        )
                     }
                 }
             }
 
-            // Client Info Card
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -323,7 +328,6 @@ fun AppointmentDetailScreen(
                             )
                         }
 
-                        // Direct phone call intent
                         IconButton(
                             onClick = {
                                 val intent = Intent(Intent.ACTION_DIAL).apply {
@@ -382,7 +386,6 @@ fun AppointmentDetailScreen(
                 }
             }
 
-            // Service & Pricing Breakdown Card
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -398,7 +401,6 @@ fun AppointmentDetailScreen(
                     )
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    // Base service
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
@@ -415,7 +417,6 @@ fun AppointmentDetailScreen(
                         )
                     }
 
-                    // Addons
                     if (appointment.selectedAddonNames.isNotBlank()) {
                         Spacer(modifier = Modifier.height(8.dp))
                         Row(
@@ -440,7 +441,6 @@ fun AppointmentDetailScreen(
                     HorizontalDivider()
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    // Total
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
@@ -461,7 +461,6 @@ fun AppointmentDetailScreen(
                 }
             }
 
-            // Web Notification Services Section (RF07)
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -495,7 +494,6 @@ fun AppointmentDetailScreen(
                     )
                     Spacer(modifier = Modifier.height(14.dp))
 
-                    // WhatsApp Button
                     FilledTonalButton(
                         onClick = { viewModel.sendWhatsApp(appointment) },
                         modifier = Modifier
@@ -517,7 +515,6 @@ fun AppointmentDetailScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    // SMS Button
                     FilledTonalButton(
                         onClick = { viewModel.sendSms(appointment) },
                         modifier = Modifier
@@ -539,7 +536,6 @@ fun AppointmentDetailScreen(
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    // Email Button
                     FilledTonalButton(
                         onClick = { viewModel.sendEmail(appointment) },
                         modifier = Modifier
@@ -561,7 +557,6 @@ fun AppointmentDetailScreen(
 
                     Spacer(modifier = Modifier.height(12.dp))
 
-                    // Simulated Webhook test
                     OutlinedButton(
                         onClick = {
                             viewModel.testApiWebhook(appointment, "whatsapp") {}
@@ -585,7 +580,6 @@ fun AppointmentDetailScreen(
         }
     }
 
-    // Delete confirmation dialog
     if (showDeleteDialog) {
         AlertDialog(
             onDismissRequest = { showDeleteDialog = false },

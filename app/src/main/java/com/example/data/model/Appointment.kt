@@ -8,7 +8,7 @@ import java.util.Date
 import java.util.Locale
 
 enum class AppointmentStatus(val displayNameEs: String, val displayNameEn: String) {
-    PENDING("Pendiente", "Pending"),
+    PENDING( "Pendiente", "Pending"),
     IN_PROGRESS("En atención", "In Progress"),
     COMPLETED("Completada", "Completed"),
     CANCELLED("Cancelada", "Cancelled")
@@ -140,13 +140,13 @@ data class Appointment(
     val serviceName: String,
     val servicePrice: Double,
     val durationMinutes: Int,
-    val selectedAddonIds: String = "", // comma-separated addon IDs
-    val selectedAddonNames: String = "", // comma-separated addon names for display
+    val selectedAddonIds: String = "",
+    val selectedAddonNames: String = "",
     val addonsPrice: Double = 0.0,
     val totalPrice: Double,
-    val appointmentDateMillis: Long, // timestamp for day
-    val appointmentHour: Int, // 0-23
-    val appointmentMinute: Int, // 0-59
+    val appointmentDateMillis: Long,
+    val appointmentHour: Int,
+    val appointmentMinute: Int,
     val status: AppointmentStatus = AppointmentStatus.PENDING,
     val notes: String = "",
     val isSynced: Boolean = false,

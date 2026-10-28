@@ -215,7 +215,6 @@ fun AppointmentCard(
         Column(
             modifier = Modifier.padding(14.dp)
         ) {
-            // Header: Date/Time + Sync badge + Status
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -238,7 +237,6 @@ fun AppointmentCard(
                 }
 
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    // Sync icon
                     Icon(
                         imageVector = if (appointment.isSynced) Icons.Default.Cloud else Icons.Default.CloudOff,
                         contentDescription = if (appointment.isSynced) "Sincronizado" else "Pendiente de sincronizar",
@@ -253,12 +251,10 @@ fun AppointmentCard(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Client Info & Avatar
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Client initials avatar
                 val initials = appointment.clientName.trim().split(" ")
                     .mapNotNull { it.firstOrNull()?.toString() }
                     .take(2)
@@ -306,7 +302,6 @@ fun AppointmentCard(
                     }
                 }
 
-                // Total price
                 Text(
                     text = "$currencySymbol${appointment.totalPrice.toInt()}",
                     style = MaterialTheme.typography.titleLarge,
@@ -317,7 +312,6 @@ fun AppointmentCard(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Service details & duration
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -341,7 +335,6 @@ fun AppointmentCard(
                     }
                 }
 
-                // WhatsApp quick button
                 IconButton(
                     onClick = onWhatsAppClick,
                     modifier = Modifier
@@ -375,7 +368,6 @@ fun EmptyAppointmentsView(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        // Empty illustration asset
         Image(
             painter = painterResource(id = R.drawable.img_empty_appointments),
             contentDescription = null,
@@ -457,7 +449,6 @@ fun ThirdPartyNotificationDialog(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
 
-                // WhatsApp
                 FilledTonalButton(
                     onClick = onWhatsApp,
                     modifier = Modifier
@@ -477,7 +468,6 @@ fun ThirdPartyNotificationDialog(
                     Text("WhatsApp Business (+${appointment.clientPhone})", fontWeight = FontWeight.Bold)
                 }
 
-                // SMS
                 FilledTonalButton(
                     onClick = onSms,
                     modifier = Modifier
@@ -497,7 +487,6 @@ fun ThirdPartyNotificationDialog(
                     Text("SMS Twilio Reminder", fontWeight = FontWeight.Bold)
                 }
 
-                // Email
                 FilledTonalButton(
                     onClick = onEmail,
                     modifier = Modifier
@@ -522,7 +511,6 @@ fun ThirdPartyNotificationDialog(
                     )
                 }
 
-                // Web API Webhook simulator (for automated API test)
                 OutlinedButton(
                     onClick = {
                         testingService = "whatsapp"

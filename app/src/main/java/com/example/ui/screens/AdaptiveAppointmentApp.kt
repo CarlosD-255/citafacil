@@ -61,9 +61,7 @@ fun AdaptiveAppointmentApp(
         val isExpanded = maxWidth >= 720.dp
 
         if (isExpanded) {
-            // Tablet / Foldable Dual Pane Layout (RNF03)
             Row(modifier = Modifier.fillMaxSize()) {
-                // Master Pane (Left): Always shows the List
                 Box(
                     modifier = Modifier
                         .width(380.dp)
@@ -87,7 +85,6 @@ fun AdaptiveAppointmentApp(
 
                 VerticalDivider(color = MaterialTheme.colorScheme.outlineVariant)
 
-                // Detail Pane (Right): Shows selected detail, form, settings or placeholder
                 Box(
                     modifier = Modifier
                         .weight(1f)
@@ -117,7 +114,7 @@ fun AdaptiveAppointmentApp(
                                 AppointmentDetailScreen(
                                     appointmentId = targetId,
                                     viewModel = viewModel,
-                                    onBack = { /* Keep active in expanded mode */ },
+                                    onBack = { },
                                     onEdit = { editId ->
                                         val appt = allAppointments.find { it.id == editId }
                                         if (appt != null) {
@@ -143,7 +140,6 @@ fun AdaptiveAppointmentApp(
                 }
             }
         } else {
-            // Handheld Compact Single Pane Layout with BackHandler
             when (currentScreen) {
                 AppScreen.LIST -> {
                     AppointmentsListScreen(

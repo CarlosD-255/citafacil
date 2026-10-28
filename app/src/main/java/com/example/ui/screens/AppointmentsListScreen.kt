@@ -87,7 +87,6 @@ fun AppointmentsListScreen(
 
     var appointmentForNotification by remember { mutableStateOf<Appointment?>(null) }
 
-    // Cloud sync icon rotation animation
     val infiniteTransition = rememberInfiniteTransition(label = "sync_spin")
     val spinAngle by infiniteTransition.animateFloat(
         initialValue = 0f,
@@ -118,7 +117,6 @@ fun AppointmentsListScreen(
                     }
                 },
                 actions = {
-                    // Sync status button
                     IconButton(
                         onClick = { viewModel.syncNow() },
                         modifier = Modifier.testTag("topbar_sync_btn")
@@ -139,7 +137,6 @@ fun AppointmentsListScreen(
                         }
                     }
 
-                    // Settings button
                     IconButton(
                         onClick = onSettingsClick,
                         modifier = Modifier.testTag("topbar_settings_btn")
@@ -169,10 +166,8 @@ fun AppointmentsListScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            // Stats summary row
             StatsSummarySection(stats = stats)
 
-            // Search Bar
             OutlinedTextField(
                 value = searchQuery,
                 onValueChange = { viewModel.onSearchQueryChange(it) },
@@ -207,7 +202,6 @@ fun AppointmentsListScreen(
                     .testTag("search_input")
             )
 
-            // Status filter chips (RF04)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -263,7 +257,6 @@ fun AppointmentsListScreen(
                 )
             }
 
-            // Appointments List (RF04 LazyColumn)
             if (appointments.isEmpty()) {
                 if (allAppointments.isEmpty()) {
                     EmptyAppointmentsView(
@@ -305,7 +298,6 @@ fun AppointmentsListScreen(
         }
     }
 
-    // Direct Notification Dialog
     appointmentForNotification?.let { appt ->
         ThirdPartyNotificationDialog(
             appointment = appt,

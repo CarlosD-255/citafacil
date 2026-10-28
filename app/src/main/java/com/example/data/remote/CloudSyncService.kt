@@ -4,14 +4,11 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.example.data.local.AppointmentDao
-import com.example.data.model.Appointment
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
-import java.util.UUID
 
 data class SyncState(
     val isSyncing: Boolean = false,
@@ -23,7 +20,8 @@ data class SyncState(
 
 class CloudSyncService(
     private val context: Context,
-    private val appointmentDao: AppointmentDao
+    private val appointmentDao: AppointmentDao,
+    private val apiService: AppointmentApiService
 ) {
     private val _syncState = MutableStateFlow(SyncState())
     val syncState: StateFlow<SyncState> = _syncState.asStateFlow()
@@ -63,17 +61,19 @@ class CloudSyncService(
         )
 
         try {
-            // Retrieve appointments that need synchronization
             val unsynced = appointmentDao.getUnsyncedAppointments()
-
-            // Simulate cloud HTTP latency (posting to Web API)
-            delay(1000)
-
             var syncedCount = 0
             val syncTime = System.currentTimeMillis()
 
             for (appt in unsynced) {
-                val cloudId = if (appt.remoteId.isNotBlank()) appt.remoteId else "CLOUD-${UUID.randomUUID().toString().take(8).uppercase()}"
+                val dto = appt.toDto()
+                val responseDto = if (appt.remoteId.isBlank()) {
+                    apiService.createAppointment(dto)
+                } else {
+                    apiService.updateAppointment(appt.remoteId, dto)
+                }
+
+                val cloudId = responseDto.id ?: "REMOTE-${System.currentTimeMillis()}"
                 appointmentDao.markAsSynced(
                     id = appt.id,
                     remoteId = cloudId,

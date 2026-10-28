@@ -18,9 +18,6 @@ data class NotificationResult(
 
 class WebNotificationService(private val context: Context) {
 
-    /**
-     * Builds standard message template for the appointment
-     */
     fun buildAppointmentMessage(
         appointment: Appointment,
         businessName: String = "CitaFácil Barber & Salon",
@@ -46,13 +43,9 @@ class WebNotificationService(private val context: Context) {
         }
     }
 
-    /**
-     * Opens WhatsApp with pre-filled message (WhatsApp Business API intent)
-     */
     fun sendWhatsApp(appointment: Appointment, businessName: String = "CitaFácil"): Boolean {
         return try {
             val rawPhone = appointment.clientPhone.filter { it.isDigit() }
-            // Clean phone number (add country code if needed, default to MX 52)
             val cleanPhone = if (rawPhone.length == 10) "52$rawPhone" else rawPhone
             val text = buildAppointmentMessage(appointment, businessName)
             val encodedText = URLEncoder.encode(text, "UTF-8")
@@ -65,15 +58,11 @@ class WebNotificationService(private val context: Context) {
             context.startActivity(intent)
             true
         } catch (e: Exception) {
-            // Fallback: general share intent
             sendViaShareIntent(appointment, businessName)
             false
         }
     }
 
-    /**
-     * Opens SMS app prefilled with appointment reminder (Twilio / SMS channel)
-     */
     fun sendSms(appointment: Appointment, businessName: String = "CitaFácil"): Boolean {
         return try {
             val message = "Recordatorio de cita en $businessName para ${appointment.clientName}: ${appointment.getFormattedDate()} a las ${appointment.getFormattedTime()} (${appointment.serviceName}). Total: $${appointment.totalPrice.toInt()}. ¡Te esperamos!"
@@ -90,9 +79,6 @@ class WebNotificationService(private val context: Context) {
         }
     }
 
-    /**
-     * Opens Email app with pre-filled formal appointment confirmation (SendGrid / Email channel)
-     */
     fun sendEmail(appointment: Appointment, businessName: String = "CitaFácil"): Boolean {
         return try {
             val emailAddress = appointment.clientEmail.ifBlank { "" }
@@ -129,15 +115,10 @@ class WebNotificationService(private val context: Context) {
         }
     }
 
-    /**
-     * Simulates sending via third-party web API (Twilio / SendGrid / WhatsApp Cloud API)
-     * Useful for automated backend notifications as requested in Technical Proposal.
-     */
     suspend fun dispatchThirdPartyWebhook(
         appointment: Appointment,
-        service: String // "whatsapp", "twilio_sms", "sendgrid_email"
+        service: String
     ): NotificationResult = withContext(Dispatchers.IO) {
-        // Simulate network latency for API call
         delay(1200)
         when (service) {
             "whatsapp" -> NotificationResult(
